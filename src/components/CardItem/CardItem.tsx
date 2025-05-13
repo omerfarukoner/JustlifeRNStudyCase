@@ -11,7 +11,12 @@ interface CardItemProps {
 
 const CardItem: React.FC<CardItemProps> = ({ card, onPress }) => {
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress} disabled>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={onPress}
+      disabled={!onPress}
+      testID={`card-item-${card.cardId}`}
+    >
       <OptimizedImage
         source={{ uri: card.img }}
         style={styles.image}

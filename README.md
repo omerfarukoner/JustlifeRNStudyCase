@@ -4,6 +4,10 @@ A scalable React Native application built with a feature-based architecture and 
 
 This project was built as if it would be released as a real product, with a focus on performance, stability, and scalability.
 
+## 🎥 Demo Video
+
+[![Watch the demo](https://img.youtube.com/vi/PaIRIBqB_t4/hqdefault.jpg)](https://www.youtube.com/watch?v=PaIRIBqB_t4)
+
 ---
 
 ## 🧠 Key Decisions & Architectural Notes
@@ -137,6 +141,31 @@ To keep the scope lean and avoid overengineering, the following features are pos
 - In-app error boundaries for safer crash handling.
 - Centralized toast/alert system for consistent user feedback.
 - CI/CD pipeline setup for automated testing and build verification.
+
+---
+
+## 🧪 Testing
+
+Important logic and data-related layers of the application are covered with unit tests.  
+Smaller UI components were intentionally skipped to keep the focus on core functionality and performance-critical logic.
+
+Tests include:
+
+- API service logic (`cardService`)
+- Local cache system (`cacheService`)
+- Custom hook (`useAllCards`)
+- Key container components (`Cards`, `CardTypes`, `CardSearchResults`)
+- Application bootstrap (`App.tsx`)
+
+### 🧾 Coverage Summary
+
+    Statements   : 93.68%
+    Branches     : 80.34%
+    Functions    : 100%
+    Lines        : 98.39%
+    Test Suites  : 8 passed (100%)
+
+Coverage was collected using Jest, with a focus on testing the main logic instead of all UI details.
 
 ---
 
