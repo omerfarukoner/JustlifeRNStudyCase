@@ -5,11 +5,21 @@
  */
 
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import AppNavigator from './src/navigation/AppNavigator';
-import { ConnectivityProvider } from './src/context/ConnectivityContext';
 import { ConnectivityBanner } from './src/components';
+import { ConnectivityProvider } from './src/context/ConnectivityContext';
+import AppNavigator from './src/navigation/AppNavigator';
+import './src/utils/wdyr';
+
+if (process.env.NODE_ENV === 'development') {
+  const whyDidYouRender = require('@welldone-software/why-did-you-render');
+  whyDidYouRender(React, {
+    trackAllPureComponents: true,
+    trackAllComponents: true,
+    exclude: [/^RCT/, /^RN/],
+  });
+}
 
 function App(): React.JSX.Element {
   return (
@@ -23,6 +33,11 @@ function App(): React.JSX.Element {
     </SafeAreaProvider>
   );
 }
+
+App.whyDidYouRender = {
+  logOnDifferentValues: true,
+  customName: 'App',
+};
 
 const styles = StyleSheet.create({
   container: {
