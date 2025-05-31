@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useMemo } from 'react';
 import { TouchableOpacity, Text, View } from 'react-native';
 import { Card } from '../../types/card.types';
 import styles from './CardItem.styles';
@@ -10,6 +10,7 @@ interface CardItemProps {
 }
 
 const CardItem: React.FC<CardItemProps> = ({ card, onPress }) => {
+  const imageSource = useMemo(() => ({ uri: card.img }), [card.img]);
   return (
     <TouchableOpacity
       style={styles.container}
@@ -18,7 +19,7 @@ const CardItem: React.FC<CardItemProps> = ({ card, onPress }) => {
       testID={`card-item-${card.cardId}`}
     >
       <OptimizedImage
-        source={{ uri: card.img }}
+        source={imageSource}
         style={styles.image}
         resizeMode="contain"
         priority="high"

@@ -1,11 +1,11 @@
-import React, { memo, useState } from 'react';
-import { View, ActivityIndicator, ViewStyle } from 'react-native';
+import React, { memo, useCallback, useState } from 'react';
+import { ActivityIndicator, View, ViewStyle } from 'react-native';
 import FastImage, {
   FastImageProps,
-  Source,
   OnLoadEvent,
-  ResizeMode,
   Priority,
+  ResizeMode,
+  Source,
 } from 'react-native-fast-image';
 import { colors } from '../../theme';
 import styles from './OptimizedImage.styles';
@@ -69,16 +69,19 @@ const OptimizedImage: React.FC<OptimizedImageProps> = memo(
     const [isLoading, setIsLoading] = useState(true);
     const [hasError, setHasError] = useState(false);
 
-    const handleLoad = (onLoadEvent: OnLoadEvent) => {
-      setIsLoading(false);
-      onLoad?.(onLoadEvent);
-    };
+    const handleLoad = useCallback(
+      (onLoadEvent: OnLoadEvent) => {
+        setIsLoading(false);
+        onLoad?.(onLoadEvent);
+      },
+      [onLoad],
+    );
 
-    const handleError = () => {
+    const handleError = useCallback(() => {
       setIsLoading(false);
       setHasError(true);
       onError?.();
-    };
+    }, [onError]);
 
     const fastImageProps = {
       source: hasError ? fallbackSource : source,
